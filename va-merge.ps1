@@ -28,7 +28,7 @@ $params = Validate-Path -i $i -o $o -f $f
 
 $videos = Get-ChildItem -Path $($params.i) -Filter "*.$($params.f)"
 
-foreach ($video in $vlist) {
+foreach ($video in $videos) {
     $au_name = $video.DirectoryName + $video.BaseName + ".m4a"
     $out = "$($params.o)\$($video.BaseName)_out.$($params.f)"
     & ffmpeg -i $video.FullName -i $au_name -c:v copy -c:a copy $out
