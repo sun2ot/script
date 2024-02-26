@@ -29,8 +29,9 @@ $params = Validate-Path -i $i -o $o -f $f
 $videos = Get-ChildItem -Path $($params.i) -Filter "*.$($params.f)"
 
 foreach ($video in $videos) {
-    $au_name = $video.DirectoryName + $video.BaseName + ".m4a"
-    $out = "$($params.o)\$($video.BaseName)_out.$($params.f)"
+    $au_name = $video.FullName -replace $params.f,"m4a"
+    #$out = "$($params.o)\$($video.BaseName)_out.$($params.f)"
+    $out = "$($params.o)\$($video.BaseName)_out.mp4"
     & ffmpeg -i $video.FullName -i $au_name -c:v copy -c:a copy $out
 }
 pause
