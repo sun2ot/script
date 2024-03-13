@@ -2,7 +2,7 @@
 $sourceFolder = "D:\obsidian"
 
 # 目标压缩包存储路径
-$destinationFolder = "F:\share"
+$destinationFolder = "F:\WPSCloud\443891098\WPS云盘\archive"
 
 # 获取当前日期时间并格式化为指定格式（例如：yyyyMMdd_HHmmss）
 $timestamp = Get-Date -Format "yyyyMMdd_HHmmss"
@@ -14,4 +14,16 @@ $zipFileName = "Backup_$timestamp.zip"
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 [System.IO.Compression.ZipFile]::CreateFromDirectory($sourceFolder, "$destinationFolder\$zipFileName")
 
-Write-Host "$timestamp：备份完成，$zipFileName 已保存在 $destinationFolder"
+# Write-Host "$timestamp：备份完成，$zipFileName 已保存在 $destinationFolder"
+
+# 获取目标路径下所有的zip文件
+$zipFiles = Get-ChildItem -Path $destinationFolder -Filter "*.zip"
+
+# 如果zip文件数量超过7个，则删除时间最早的zip文件，直到剩下7个为止
+if ($zipFiles.Count -ge 8) {
+    $oldestFiles = $zipFiles | Sort-Object CreationTime | Select-Object -First ($zipFiles.Count - 7)
+    foreach ($file in $oldestFiles) {
+        Remove-Item $file.FullName -Force
+        # Write-Host "删除文件 $($file.FullName)"
+    }
+}
