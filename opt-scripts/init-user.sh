@@ -38,13 +38,13 @@ cat << EOF > "/home/$user/README.txt"
 ## 切换你的shell
 
 1. 你当前的 shell 为 sh，需要切换为 bash/zsh (不知道就选bash)
-2. 执行"menu.sh"，选择 3/4，然后按提示输入密码
+2. 执行"menu"，选择 3/4，然后按提示输入密码
 3. 执行 "exit" 退出登录，然后重新登录即可生效
 4. 要重新登录！要重新登录！要重新登录！
 
 ## 安装conda环境
 
-执行"menu.sh"，选择2
+执行"menu"，选择2
 
 ## Warning!!!
 
