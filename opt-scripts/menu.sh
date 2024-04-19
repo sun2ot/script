@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# 用户操作菜单
+
 # 代理
 function start_proxy() { /usr/local/script/proxy.sh; }
 

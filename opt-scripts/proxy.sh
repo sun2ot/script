@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# 向用户的shell配置文件开头写入两个函数：设置/取消设置 代理
+
 # 检查当前用户的shell是否为bash
 if [ -n "$SHELL" ] && [ "$(basename "$SHELL")" = "bash" ]; then
     shell_type="bash"
@@ -46,10 +48,3 @@ echo "1. 代理模块注入成功"
 echo "2. 请按0退出脚本，然后手动执行 source $HOME/$rc_file"
 echo "3. 下次登录无需再次启用代理，只需执行 ep 开启代理，执行 dp 取消代理"
 echo "#######################################"
-
-# 重新加载配置文件
-if [ "$shell_type" = "bash" ]; then
-    source "$HOME/$rc_file"
-else
-    exec zsh -l -c "source $HOME/$rc_file"
-fi

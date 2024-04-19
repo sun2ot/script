@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# 传入用户名列表，批量执行 init-user.sh
+
 # Warning:
 # 1. 要使用这个脚本，你需要确保 init-user.sh 和 batch-init-users.sh 位于同一目录
 # 2. 脚本需要传入一个包含要初始化的用户列表的文本文件(每行一个用户名)

@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# 适用于 nmu AIOS 平台
+# 在用户家目录下创建指向 NAS 的软链接、写入一些脚本文件和提示文档
+
 # 检查是否传入了用户名参数
 if [ $# -ne 1 ]; then
     echo "Usage: $0 <username>"

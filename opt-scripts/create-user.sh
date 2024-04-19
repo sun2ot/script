@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# 批量创建新用户并初始化密码为123456
+
 # 定义要创建的用户列表
 user_list=("yzh" "yzy" "wwl" "cfp" "wym" "wyy" "wt" "jbx" "zbj" "hml")
 
