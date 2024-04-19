@@ -10,6 +10,11 @@ function install_miniconda() { /usr/local/script/miniconda3.sh; }
 function chsh-bash() { 
     chsh -s /bin/bash;
     cp /etc/skel/.bashrc /etc/skel/.bash_profile $HOME
+    ehho "##############################################"
+    echo "The current shell has changed to \"bash\"."
+    echo "Please run "exit" to log out."
+    echo "The shell change will effect on the next log in!"
+    ehho "##############################################"
 }
 function chsh-zsh() { /usr/local/script/chsh-zsh.sh; }
 
@@ -23,6 +28,7 @@ function show_menu() {
     echo "---------"
     echo "   菜单   "
     echo "---------"
+    echo "Tips: 部分功能未完全测试，如有bug请及时反馈管理员。"
     echo
     echo "1. 启用代理"
     echo "2. 安装 miniconda"
