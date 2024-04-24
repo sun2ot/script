@@ -29,9 +29,6 @@ if [ ! -L "/home/$user/$user" ]; then
     ln -s "/private/$user" "/home/$user"
 fi
 
-# conda 一键安装脚本
-cp miniconda3.sh /home/$user
-
 cat << EOF > "/home/$user/README.txt"
 以下步骤按顺序执行：
 
