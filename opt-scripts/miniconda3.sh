@@ -10,24 +10,26 @@ init_shell() {
           # 初始化bash
           ~/miniconda3/bin/conda init bash
       fi  
-  fi  
-
   # if running zsh  
-  if [ -n "$ZSH_VERSION" ]; then  
+  elif [ -n "$ZSH_VERSION" ]; then  
       # include .zshrc if it exists  
       if [ -f "$HOME/.zshrc" ]; then  
           ~/miniconda3/bin/conda init zsh
       fi  
+  else
+      echo "No bash or zsh found. Can't initialize conda environment."
+      exit 1
   fi  
 }
 
 remind() {
-  echo "---------------------------------"
+  echo "#############################"
   if [ -n "$BASH_VERSION" ]; then
     echo "Run \"source ~/.bashrc\" to activate the conda environment."
   elif [ -n "$ZSH_VERSION" ]; then
     echo "Run \"source ~/.zshrc\" to activate the conda environment."
   fi
+  echo "#############################"
 }
 
 # 检查~/miniconda3路径是否存在，如果存在，则跳过安装
