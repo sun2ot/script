@@ -30,7 +30,7 @@ while IFS= read -r username; do
             # 切换到用户家目录并执行 func.sh
             echo "Running $func_script in $home_dir for user $username"
             cd "$home_dir" || { echo "Error: Unable to change directory to $home_dir"; exit 1; }
-            "./$func_script"
+            "$func_script"
             cd - >/dev/null  # 切回原始目录
         else
             echo "Error: Home directory for user $username does not exist."
