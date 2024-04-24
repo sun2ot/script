@@ -3,30 +3,43 @@
 echo "sun2ot 定制版一键conda脚本 for nmu-whr 已启动, wait please..."
 
 init_shell() {
-  # if running bash  
-  if [ -n "$BASH_VERSION" ]; then  
-      # include .bashrc if it exists  
-      if [ -f "$HOME/.bashrc" ]; then  
-          # 初始化bash
-          ~/miniconda3/bin/conda init bash
-      fi  
-  # if running zsh  
-  elif [ -n "$ZSH_VERSION" ]; then  
-      # include .zshrc if it exists  
-      if [ -f "$HOME/.zshrc" ]; then  
-          ~/miniconda3/bin/conda init zsh
-      fi  
-  else
-      echo "No bash or zsh found. Can't initialize conda environment."
+  # 初始化标志
+  local init_flag=${1:-}
+  
+  if [[ -n "$init_flag" ]] && [[ "$init_flag" == *"--init"* ]]; then
+    # 执行conda初始化
+    echo "Initializing conda environment..."
+    # .bashrc exists
+    if [[ $SHELL == *"/bash" ]]; then
+      # 初始化bash
+      ~/miniconda3/bin/conda init bash
+    elif [[ $SHELL == *"/zsh" ]]; then
+      # 初始化zsh
+      ~/miniconda3/bin/conda init zsh
+    else
+      echo "You do not have any shell profiles such as .bashrc or .zshrc."
+      echo "If you use other shells(etc. fish), maybe you shoule contact the admin."
       exit 1
-  fi  
+    fi
+  else
+    # 检查当前shell是否为bash或zsh
+    if [[ $SHELL == *"/bash" ]]; then
+      echo "Bash detected."
+    elif [[ $SHELL == *"/zsh" ]]; then
+      echo "Zsh detected."
+    else
+      echo "No bash or zsh found. Run 'menu' to change your shell first."
+      exit 1
+    fi
+  fi
 }
+
 
 remind() {
   echo "#############################"
-  if [ -n "$BASH_VERSION" ]; then
+  if [[ $SHELL == *"/bash" ]]; then
     echo "Run \"source ~/.bashrc\" to activate the conda environment."
-  elif [ -n "$ZSH_VERSION" ]; then
+  elif [[ $SHELL == *"/zsh" ]]; then
     echo "Run \"source ~/.zshrc\" to activate the conda environment."
   fi
   echo "#############################"
@@ -39,7 +52,7 @@ if [ -d "$HOME/miniconda3" ]; then
     case $user_response in
         [Yy]*)
             # 初始化bash或zsh
-            init_shell
+            init_shell --init
             remind
             ;;
         [Nn]*)
@@ -53,6 +66,8 @@ if [ -d "$HOME/miniconda3" ]; then
 else
     echo "Miniconda3 not found, starting installation..."
 
+    init_shell
+
     # 建立miniconda3文件夹
     mkdir -p ~/miniconda3 || { echo "Failed to create directory."; exit 1; }
 
@@ -63,7 +78,7 @@ else
     # bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3 || { echo "Miniconda3 installation failed."; exit 1; }
     bash /private/Miniconda3-latest-Linux-x86_64.sh -b -u -p ~/miniconda3 || { echo "Miniconda3 installation failed."; exit 1; }
 
-    init_shell
+    init_shell --init
 
     echo "Miniconda3 installation complete."
 
