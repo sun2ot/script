@@ -6,7 +6,7 @@
 function start_proxy() { /usr/local/script/proxy.sh; }
 
 # 安装 miniconda3
-function install_miniconda() { /usr/local/script/miniconda3.sh; }
+function install_miniconda() { /usr/local/script/miniconda3.sh $HOME/miniconda3; }
 
 # 安装 miniconda3 for AIOS
 function install_miniconda_AIOS() { /usr/local/script/miniconda3.sh $HOME/$USER/miniconda3; }
@@ -17,7 +17,7 @@ function chsh-bash() {
     cp /etc/skel/.bashrc /etc/skel/.bash_profile $HOME
     echo "##############################################"
     echo "The current shell has changed to \"bash\"."
-    echo "Please run "exit" to log out."
+    echo "Please run 'exit' to log out."
     echo "The shell change will effect on the next log in!"
     echo "##############################################"
 }
