@@ -15,29 +15,18 @@ user="$1"
 if [ ! -d "/private/$user" ]; then
     mkdir "/private/$user"
     chown "$user:$user" "/private/$user"
-    chmod 755 "/private/$user"
+    chmod 755 "/private/$user" -R
 fi
 
-## Deprecated, please use v2.0
-
-# v1.0 
 # 确保/home/$user目录存在，否则ln命令会失败
-# if [ ! -d "/home/$user" ]; then
-#     echo "Error: Home directory /home/$user does not exist."
-#     exit 1
-# fi
+if [ ! -d "/home/$user" ]; then
+    echo "Error: Home directory /home/$user does not exist."
+    exit 1
+fi
 
 # 创建指向NFS的符号链接
-# if [ ! -L "/home/$user/$user" ]; then
-#     ln -s "/private/$user" "/home/$user"
-# fi
-
-# v2.0 
-# 直接将NFS挂载到/home/$user
-if [ ! -d "/home/$user" ]; then
+if [ ! -L "/home/$user/$user" ]; then
     ln -s "/private/$user" "/home/$user"
-else
-    echo "Warning: /home/$user already exists, skipping."
 fi
 
 cat << EOF > "/home/$user/README.txt"
