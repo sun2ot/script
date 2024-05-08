@@ -1,5 +1,16 @@
 #!/bin/bash
 
+# 接受用户传入的安装路径，部署miniconda3
+
+# 检查传参数量
+if [ $# -ne 1 ]; then
+    echo "Usage: $0 </absolute path/to/install/miniconda3>, the specified path not exists is ok, either."
+    echo "Watch out! The path should end with 'miniconda3'."
+    exit 1
+fi
+
+path="$1"
+
 echo "sun2ot 定制版一键conda脚本 for nmu-whr 已启动, wait please..."
 
 init_shell() {
@@ -12,10 +23,10 @@ init_shell() {
     # .bashrc exists
     if [[ $SHELL == *"/bash" ]]; then
       # 初始化bash
-      ~/miniconda3/bin/conda init bash
+      $path/bin/conda init bash
     elif [[ $SHELL == *"/zsh" ]]; then
       # 初始化zsh
-      ~/miniconda3/bin/conda init zsh
+      $path/bin/conda init zsh
     else
       echo "You do not have any shell profiles such as .bashrc or .zshrc."
       echo "If you use other shells(etc. fish), maybe you shoule contact the admin."
@@ -45,8 +56,8 @@ remind() {
   echo "#############################"
 }
 
-# 检查~/miniconda3路径是否存在，如果存在，则跳过安装
-if [ -d "$HOME/miniconda3" ]; then
+# 检查安装路径是否存在，如果存在，则跳过安装
+if [ -d "$path" ]; then
     echo "Miniconda3 already installed. Do you want to re-initialize the conda environment in your current shell (y/n)? "
     read -rp "Enter your choice: " user_response
     case $user_response in
@@ -66,17 +77,18 @@ if [ -d "$HOME/miniconda3" ]; then
 else
     echo "Miniconda3 not found, starting installation..."
 
+    # just debug
     init_shell
 
     # 建立miniconda3文件夹
-    mkdir -p ~/miniconda3 || { echo "Failed to create directory."; exit 1; }
+    mkdir -p $path || { echo "Failed to create directory."; exit 1; }
 
     # 下载安装脚本
-    # wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
+    wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O $path/miniconda.sh
 
-    # 执行脚本并安装conda到~/miniconda3路径下
+    # 执行脚本并安装
     # bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3 || { echo "Miniconda3 installation failed."; exit 1; }
-    bash /private/Miniconda3-latest-Linux-x86_64.sh -b -u -p ~/miniconda3 || { echo "Miniconda3 installation failed."; exit 1; }
+    bash $path/miniconda.sh -b -u -p $path || { echo "Miniconda3 installation failed."; exit 1; }
 
     init_shell --init
 
