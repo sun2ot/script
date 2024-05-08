@@ -8,6 +8,9 @@ function start_proxy() { /usr/local/script/proxy.sh; }
 # 安装 miniconda3
 function install_miniconda() { /usr/local/script/miniconda3.sh; }
 
+# 安装 miniconda3 for AIOS
+function install_miniconda_AIOS() { /usr/local/script/miniconda3.sh $HOME/$USER/miniconda3; }
+
 # 切换 shell
 function chsh-bash() { 
     chsh -s /bin/bash;
@@ -34,8 +37,9 @@ function show_menu() {
     echo
     echo "1. 启用代理"
     echo "2. 安装 miniconda"
-    echo "3. 切换 bash"
-    echo "4. 切换 zsh"
+    echo "3. 安装 miniconda for AIOS"
+    echo "4. 切换 bash"
+    echo "5. 切换 zsh"
     echo "0. 退出"
     echo
     read -p "请输入一个选项（数字）：" option
@@ -48,9 +52,12 @@ function show_menu() {
             install_miniconda
             ;;
         3)
-            chsh-bash
+            install_miniconda_AIOS
             ;;
         4)
+            chsh-bash
+            ;;
+        5)
             chsh-zsh
             ;;
         0)
