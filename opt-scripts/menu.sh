@@ -61,7 +61,8 @@ function show_menu() {
             ;;
     esac
 
-    show_menu
+    # The menu should not be showed repeatedly, because always have silly boys which can not see the logs. 
+    # show_menu
 }
 
 # 启动菜单
