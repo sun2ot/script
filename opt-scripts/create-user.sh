@@ -1,18 +1,20 @@
 #!/bin/bash
 
-# 批量创建新用户并初始化密码为123456
+# 创建新用户并初始化密码为123456
 
-# 定义要创建的用户列表
-user_list=("yzh" "yzy" "wwl" "cfp" "wym" "wyy" "wt" "jbx" "zbj" "hml")
+# 检查是否传入了用户名参数
+if [ $# -ne 1 ]; then
+    echo "Usage: $0 <username>"
+    exit 1
+fi
 
-# 循环遍历用户列表
-for user in "${user_list[@]}"
-do
-    # 创建用户
-    sudo useradd -m $user
-    
-    # 设置密码
-    echo "正在设置 $user 的密码："
-    echo -e "123456" | passwd $user
-done
+user="$1"
+
+# 创建用户
+sudo useradd -m $user
+
+# 设置密码
+echo "正在设置 $user 的密码："
+echo -e "123456" | passwd $user
+
 

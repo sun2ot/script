@@ -1,0 +1,1 @@
+robocopy C:\Users\y2pub\.ssh\ E:\Ops\Terminal\.ssh\ /MIR /COPY:DAT /LOG:D:\ssh-trans.log

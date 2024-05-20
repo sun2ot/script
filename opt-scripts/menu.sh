@@ -9,7 +9,14 @@ function start_proxy() { /usr/local/script/proxy.sh; }
 function install_miniconda() { /usr/local/script/miniconda3.sh $HOME/miniconda3; }
 
 # 安装 miniconda3 for AIOS
-function install_miniconda_AIOS() { /usr/local/script/miniconda3.sh $HOME/$USER/miniconda3; }
+function install_miniconda_AIOS() {
+    if [ ! -L $HOME/$USER ]; then
+        echo "Call the admin to init your account!"
+        exit 1
+    elif
+        /usr/local/script/miniconda3.sh $HOME/$USER/miniconda3; 
+    fi
+}
 
 # 切换 shell
 function chsh-bash() { 
