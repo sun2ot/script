@@ -13,7 +13,7 @@ function install_miniconda_AIOS() {
     if [ ! -L $HOME/$USER ]; then
         echo "Call the admin to init your account!"
         exit 1
-    elif
+    else
         /usr/local/script/miniconda3.sh $HOME/$USER/miniconda3; 
     fi
 }
@@ -26,6 +26,10 @@ function chsh-bash() {
     echo "The current shell has changed to \"bash\"."
     echo "Please run 'exit' to log out."
     echo "The shell change will effect on the next log in!"
+    echo
+    echo "当前shell已切换为\"bash\"."
+    echo "请执行'exit'退出登录。"
+    echo "下次登录时修改才会生效！"
     echo "##############################################"
 }
 function chsh-zsh() { /usr/local/script/chsh-zsh.sh; }

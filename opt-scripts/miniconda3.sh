@@ -24,7 +24,7 @@ init_shell() {
     if [[ $SHELL == *"/bash" ]]; then
       # 初始化bash
       $path/bin/conda init bash
-    elif [[ $SHELL == *"/zsh" ]]; then
+    else [[ $SHELL == *"/zsh" ]]; then
       # 初始化zsh
       $path/bin/conda init zsh
     else
@@ -47,13 +47,15 @@ init_shell() {
 
 
 remind() {
-  echo "#############################"
+  echo "###########请看这里##################"
   if [[ $SHELL == *"/bash" ]]; then
-    echo "Run \"source ~/.bashrc\" to activate the conda environment."
+    echo "en: Run \"source ~/.bashrc\" to activate the conda environment."
+    echo "cn: 请执行 \"source ~/.bashrc\" 以激活conda环境!!!"
   elif [[ $SHELL == *"/zsh" ]]; then
-    echo "Run \"source ~/.zshrc\" to activate the conda environment."
+    echo "en: Run \"source ~/.zshrc\" to activate the conda environment."
+    echo "cn: 请执行 \"source ~/.zshrc\" 以激活conda环境!!!"
   fi
-  echo "#############################"
+  echo "###########求求了##################"
 }
 
 # 检查安装路径是否存在，如果存在，则跳过安装

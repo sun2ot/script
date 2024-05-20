@@ -27,6 +27,7 @@ fi
 # 创建指向NFS的符号链接
 if [ ! -L "/home/$user/$user" ]; then
     ln -s "/private/$user" "/home/$user"
+    chown "$user:$user" "/home/$user"
 fi
 
 cat << EOF > "/home/$user/README.txt"
