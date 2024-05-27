@@ -2,6 +2,8 @@
 
 # 用户操作菜单
 
+cmd="$1"
+
 # 代理
 function start_proxy() { /usr/local/script/proxy.sh; }
 
@@ -83,5 +85,35 @@ function show_menu() {
     # show_menu
 }
 
+# 显示管理员菜单
+function show_admin_menu() {
+    echo "----------"
+    echo "   Admin  "
+    echo "----------"
+    echo "Warning: You have entered the administrator menu. Carefully!!"
+    echo
+    echo "1. Deploy/Update Starship"
+    echo "0. Exit"
+    echo
+    read -p "Please choose an option (number): " option
+
+    case $option in
+        1)
+            sudo curl -sS https://starship.rs/install.sh | sh
+            ;;
+        0)
+            exit_program
+            ;;
+        *)
+            echo "Invalid option"
+            ;;
+    esac
+}
+
 # 启动菜单
-show_menu
+if [ $# -eq 0 ]; then
+    show_menu
+elif [ $cmd == "--admin"* ]
+    show_admin_menu
+fi
+
