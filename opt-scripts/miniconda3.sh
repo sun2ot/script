@@ -76,6 +76,7 @@ if [ -d "$path" ]; then
             echo "But I want you to input Yy/Nn next time, all right?"
             ;;
     esac
+    exit 1
 else
     echo "Miniconda3 not found, starting installation..."
 
