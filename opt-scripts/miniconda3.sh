@@ -24,7 +24,7 @@ init_shell() {
     if [[ $SHELL == *"/bash" ]]; then
       # 初始化bash
       $path/bin/conda init bash
-    else [[ $SHELL == *"/zsh" ]]; then
+    elif [[ $SHELL == *"/zsh" ]]; then
       # 初始化zsh
       $path/bin/conda init zsh
     else
