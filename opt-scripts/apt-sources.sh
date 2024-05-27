@@ -1,6 +1,8 @@
 #!/bin/bash
 
-# 备份当前源
+# 适用于 nmu AIOS 平台
+# 修改apt源(Ubuntu 18.04 LTS bionic)
+
 # 因为默认好像有一个什么备份，这里换个名字
 cp /etc/apt/sources.list /etc/apt/sources.yzh.list.bak
 
