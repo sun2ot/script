@@ -44,6 +44,9 @@ for profile in "${shell_profiles[@]}"; do
     echo "-------------------------"
 done
 
+# 链接starship配置文件
+link_to("/usr/local/share/starship.toml", $(realpath starship.toml))
+
 # 链接主菜单
 if [ -L "/usr/local/bin/menu" ]; then
     echo "/usr/local/bin/menu already exists. Deleting..."

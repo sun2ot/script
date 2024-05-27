@@ -113,7 +113,7 @@ function show_admin_menu() {
 # 启动菜单
 if [ $# -eq 0 ]; then
     show_menu
-elif [ $cmd == "--admin"* ]
+elif [ $cmd == "--admin" ]; then
     show_admin_menu
 fi
 
