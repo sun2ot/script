@@ -20,6 +20,26 @@ function install_miniconda_AIOS() {
     fi
 }
 
+function enable_go() {
+    if [[ $SHELL == *"/bash" ]]; then
+        echo "Bash detected."
+        #! here is ', not "
+        echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.bashrc
+        profile='~/.bashrc'
+    elif [[ $SHELL == *"/zsh" ]]; then
+        echo "Zsh detected."
+        echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.zshrc
+        profile='~/.zshrc'
+    else
+        echo "You do not have any shell profiles such as .bashrc or .zshrc."
+        echo "If you use other shells(etc. fish), maybe you shoule contact the admin."
+        exit 1
+    fi
+    
+    echo "Go 1.21.10 has been deployed."
+    echo "执行 \"source $profile\" 激活 Go 环境." 
+}
+
 # 切换 shell
 function chsh-bash() { 
     chsh -s /bin/bash;
@@ -53,6 +73,7 @@ function show_menu() {
     echo "3. 安装 miniconda for AIOS"
     echo "4. 切换 bash"
     echo "5. 切换 zsh"
+    echo "6. 启用 Go(1.21.10) 环境"
     echo "0. 退出"
     echo
     read -p "请输入一个选项（数字）：" option
@@ -73,6 +94,9 @@ function show_menu() {
         5)
             chsh-zsh
             ;;
+        6)
+            enable_go
+            ;;
         0)
             exit_program
             ;;
@@ -85,6 +109,14 @@ function show_menu() {
     # show_menu
 }
 
+
+# ---------------------------------------------------------------------- #
+
+# mihomo
+function mihomo() { /usr/local/script/mihomo.sh; }
+
+function install_go() { /usr/local/script/go.sh; }
+
 # 显示管理员菜单
 function show_admin_menu() {
     echo "----------"
@@ -93,6 +125,8 @@ function show_admin_menu() {
     echo "Warning: You have entered the administrator menu. Carefully!!"
     echo
     echo "1. Deploy/Update Starship"
+    echo "2. Deploy mihomo"
+    echo "3. Deploy Go"
     echo "0. Exit"
     echo
     read -p "Please choose an option (number): " option
@@ -100,6 +134,12 @@ function show_admin_menu() {
     case $option in
         1)
             sudo curl -sS https://starship.rs/install.sh | sh
+            ;;
+        2)
+            mihomo
+            ;;
+        3)
+            install_go
             ;;
         0)
             exit_program

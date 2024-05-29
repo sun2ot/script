@@ -15,6 +15,7 @@ link_to() {
     local target_path=$1
     local source_path=$2
 
+    echo "----------"
     if [ -L "$target_path" ]; then
         echo "$target_path already exists. Deleting..."
         rm "$target_path"
@@ -22,10 +23,12 @@ link_to() {
 
     ln -s "$source_path" "$target_path"
     echo "$source_path linked to $target_path"
+    echo "----------"
+    echo
 }
 
 # 脚本
-scripts_to_link=("chsh-zsh.sh" "miniconda3.sh" "proxy.sh")
+scripts_to_link=("chsh-zsh.sh" "miniconda3.sh" "proxy.sh" "mihomo.sh" "go.sh")
 # shell配置文件
 shell_profiles=(".bash_profile" ".zsh_profile")
 
@@ -45,7 +48,7 @@ for profile in "${shell_profiles[@]}"; do
 done
 
 # 链接starship配置文件
-link_to("/usr/local/share/starship.toml", $(realpath starship.toml))
+link_to "/usr/local/share/starship.toml" $(realpath starship.toml)
 
 # 链接主菜单
 if [ -L "/usr/local/bin/menu" ]; then
