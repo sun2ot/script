@@ -40,6 +40,26 @@ function enable_go() {
     echo "执行 \"source $profile\" 激活 Go 环境." 
 }
 
+function enable_java() {  
+  if [[ $SHELL == *"/bash" ]]; then
+    shell="$HOME/.bashrc"
+  elif [[ $SHELL == *"/zsh" ]]; then
+    shell="$HOME/.zshrc"
+  else
+    echo "You do not have any shell profiles such as .bashrc or .zshrc."
+    echo "If you use other shells(etc. fish), maybe you shoule contact the admin."
+    exit 1
+  fi
+
+  echo 'export JAVA_HOME=/opt/jdk-11.0.22' >> $shell
+  echo 'export PATH=$JAVA_HOME/bin:$PATH' >> $shell
+  echo 'export JRE_HOME=$JAVA_HOME/jre' >> $shell
+  echo 'export CLASSPATH=.:$JAVA_HOME/lib' >> $shell
+  
+  echo "Jdk 11.0.22 has been deployed."
+  echo "执行 \"source $shell\" 激活 Java 环境." 
+}
+
 # 切换 shell
 function chsh-bash() { 
     chsh -s /bin/bash;
@@ -74,6 +94,7 @@ function show_menu() {
     echo "4. 切换 bash"
     echo "5. 切换 zsh"
     echo "6. 启用 Go(1.21.10) 环境"
+    echo "7. 启用 Java-11.0.22 环境"
     echo "0. 退出"
     echo
     read -p "请输入一个选项（数字）：" option
@@ -97,6 +118,9 @@ function show_menu() {
         6)
             enable_go
             ;;
+        7)
+            enable_java
+            ;;
         0)
             exit_program
             ;;
@@ -112,10 +136,9 @@ function show_menu() {
 
 # ---------------------------------------------------------------------- #
 
-# mihomo
 function mihomo() { /usr/local/script/mihomo.sh; }
-
 function install_go() { /usr/local/script/go.sh; }
+function install_java() { /usr/local/script/java.sh; }
 
 # 显示管理员菜单
 function show_admin_menu() {
@@ -127,6 +150,7 @@ function show_admin_menu() {
     echo "1. Deploy/Update Starship"
     echo "2. Deploy mihomo"
     echo "3. Deploy Go"
+    echo "4. Deploy Java"
     echo "0. Exit"
     echo
     read -p "Please choose an option (number): " option
@@ -140,6 +164,9 @@ function show_admin_menu() {
             ;;
         3)
             install_go
+            ;;
+        4)
+            install_java
             ;;
         0)
             exit_program
