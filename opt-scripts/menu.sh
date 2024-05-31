@@ -60,6 +60,41 @@ function enable_java() {
   echo "执行 \"source $shell\" 激活 Java 环境." 
 }
 
+
+function enable_nodejs18() {  
+  if [[ $SHELL == *"/bash" ]]; then
+    shell="$HOME/.bashrc"
+  elif [[ $SHELL == *"/zsh" ]]; then
+    shell="$HOME/.zshrc"
+  else
+    echo "You do not have any shell profiles such as .bashrc or .zshrc."
+    echo "If you use other shells(etc. fish), maybe you shoule contact the admin."
+    exit 1
+  fi
+
+  echo 'export PATH=/usr/local/node-v18.20.2-linux-x64/bin:$PATH' >> $shell
+
+  echo "Node.js 18 LTS has been deployed."
+  echo "执行 \"source $shell\" 激活 Node.js 环境." 
+}
+
+function enable_nodejs16() {  
+  if [[ $SHELL == *"/bash" ]]; then
+    shell="$HOME/.bashrc"
+  elif [[ $SHELL == *"/zsh" ]]; then
+    shell="$HOME/.zshrc"
+  else
+    echo "You do not have any shell profiles such as .bashrc or .zshrc."
+    echo "If you use other shells(etc. fish), maybe you shoule contact the admin."
+    exit 1
+  fi
+
+  echo 'export PATH=/opt/node-v16.20.2-linux-x64/bin:$PATH' >> $shell
+
+  echo "Node.js 16 LTS has been deployed."
+  echo "执行 \"source $shell\" 激活 Node.js 环境." 
+}
+
 # 切换 shell
 function chsh-bash() { 
     chsh -s /bin/bash;
@@ -95,6 +130,8 @@ function show_menu() {
     echo "5. 切换 zsh"
     echo "6. 启用 Go(1.21.10) 环境"
     echo "7. 启用 Java-11.0.22 环境"
+    echo "8. 启用 Node.js 18 LTS 环境(适用于物理机)"
+    echo "9. 启用 Node.js 16 LTS 环境(适用于AIOS)"
     echo "0. 退出"
     echo
     read -p "请输入一个选项（数字）：" option
@@ -121,6 +158,12 @@ function show_menu() {
         7)
             enable_java
             ;;
+        8)
+            enable_nodejs18
+            ;;
+        9)
+            enable_nodejs16
+            ;;
         0)
             exit_program
             ;;
@@ -139,6 +182,7 @@ function show_menu() {
 function mihomo() { /usr/local/script/mihomo.sh; }
 function install_go() { /usr/local/script/go.sh; }
 function install_java() { /usr/local/script/java.sh; }
+function install_nodejs16() { /usr/local/script/node16.sh; }
 
 # 显示管理员菜单
 function show_admin_menu() {
@@ -151,6 +195,7 @@ function show_admin_menu() {
     echo "2. Deploy mihomo"
     echo "3. Deploy Go"
     echo "4. Deploy Java"
+    echo "5. Deploy Node.js 16 (for AIOS)"
     echo "0. Exit"
     echo
     read -p "Please choose an option (number): " option
@@ -168,6 +213,8 @@ function show_admin_menu() {
         4)
             install_java
             ;;
+        5)
+            install_nodejs16
         0)
             exit_program
             ;;

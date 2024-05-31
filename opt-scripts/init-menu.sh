@@ -28,7 +28,7 @@ link_to() {
 }
 
 # 脚本
-scripts_to_link=("chsh-zsh.sh" "miniconda3.sh" "proxy.sh" "mihomo.sh" "go.sh" "java.sh")
+scripts_to_link=("chsh-zsh.sh" "miniconda3.sh" "proxy.sh" "mihomo.sh" "go.sh" "java.sh" "node16.sh")
 # shell配置文件
 shell_profiles=(".bash_profile" ".zsh_profile")
 
