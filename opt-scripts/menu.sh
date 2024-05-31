@@ -215,6 +215,7 @@ function show_admin_menu() {
             ;;
         5)
             install_nodejs16
+            ;;
         0)
             exit_program
             ;;
