@@ -12,24 +12,30 @@ fi
 user="$1"
 
 # 检查NFS下是否存在用户存储，如果不存在则创建目录并修改所有权和权限
-if [ ! -d "/private/$USER" ]; then
-    mkdir "/private/$USER"
-    sudo chown "$USER:$USER" "/private/$USER"
-    sudo chmod 755 "/private/$USER"
+if [ ! -d "/private/$user" ]; then
+    echo "NFS has no this user's storage. Will create..."
+    mkdir "/private/$user"
 fi
 
+# AIOS的NFS中默认权限为777
+# 方便和安全只能二选一
+# sudo chown $user:$user /private/$user
+# sudo chmod 755 /private/$user
+
 # 确保/home/$user目录存在，否则ln命令会失败
-if [ ! -d "/home/$USER" ]; then
-    echo "Error: Home directory /home/$USER does not exist."
+if [ ! -d "/home/$user" ]; then
+    echo "Error: Home directory /home/$user does not exist."
     exit 1
 fi
 
 # 创建指向NFS的符号链接
-if [ ! -L "/home/$USER/$USER" ]; then
-    ln -s "/private/$USER" "/home/$USER"
-    sudo chown "$USER:$USER" "/home/$USER"
+if [ ! -L "/home/$user/$user" ]; then
+    ln -s /private/$user /home/$user/$user
+    echo "/home/$user/$user has been linked to NFS"
 fi
 
-echo "Preparation for $USER completed."
+# sudo chown $user:$user /home/$user/$user
+
+echo "Preparation for $user completed."
 
 exit 0
