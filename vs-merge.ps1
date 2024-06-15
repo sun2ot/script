@@ -16,7 +16,8 @@
 视频文件格式
 #>
 
-Import-Module "D:\script\common.psm1" -DisableNameChecking
+# 如果想在任意路径调用该脚本，请使用绝对路径导入该模块
+Import-Module "E:\script\common.psm1" -DisableNameChecking
 
 $params = Validate-Path
 

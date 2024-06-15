@@ -21,7 +21,8 @@ param(
     [string]$f
 )
 
-Import-Module "D:\script\common.psm1" -DisableNameChecking
+# 如果想在任意路径调用该脚本，请使用绝对路径导入该模块
+Import-Module "E:\script\common.psm1" -DisableNameChecking
 
 # 调用函数并获取返回结果
 $params = Validate-Path -i $i -o $o -f $f
