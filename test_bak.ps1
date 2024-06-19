@@ -1,8 +1,8 @@
 # 源文件夹路径
-$sourceFolder = "D:\obsidian"
+$sourceFolder = "E:\obsidian"
 
 # 目标压缩包存储路径
-$destinationFolder = "F:\WPSCloud\443891098\WPS云盘\archive"
+$destinationFolder = "F:\Archive\obsidian"
 
 # 获取当前日期时间并格式化为指定格式（例如：yyyyMMdd_HHmmss）
 $timestamp = Get-Date -Format "yyyyMMdd_HHmmss"
