@@ -10,11 +10,16 @@ fi
 
 user="$1"
 
+# 设置初始密码
+INITIAL_PASSWORD="123456"
+
 # 创建用户
 sudo useradd -m $user
+sudo cp -a /etc/skel/. /home/$user
+sudo chown -R $user:$user /home/$user
+sudo chmod 755 /home/$user
 
 # 设置密码
 echo "正在设置 $user 的密码："
-echo -e "123456" | passwd $user
-
+echo "$user:$INITIAL_PASSWORD" | chpasswd
 
