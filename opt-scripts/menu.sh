@@ -37,7 +37,7 @@ function enable_go() {
     fi
     
     echo "Go 1.21.10 has been deployed."
-    echo "执行 \"source $profile\" 激活 Go 环境." 
+    echo -e "\e[33m执行 \"source $profile\" 激活 Go 环境.\e[0m" 
 }
 
 function enable_java() {  
@@ -46,7 +46,7 @@ function enable_java() {
   elif [[ $SHELL == *"/zsh" ]]; then
     shell="$HOME/.zshrc"
   else
-    echo "You do not have any shell profiles such as .bashrc or .zshrc."
+    echo -e "\e[31mYou do not have any shell profiles such as .bashrc or .zshrc.\e[0m"
     echo "If you use other shells(etc. fish), maybe you shoule contact the admin."
     exit 1
   fi
@@ -57,7 +57,7 @@ function enable_java() {
   echo 'export CLASSPATH=.:$JAVA_HOME/lib' >> $shell
   
   echo "Jdk 11.0.22 has been deployed."
-  echo "执行 \"source $shell\" 激活 Java 环境." 
+  echo -e "\e[33m执行 \"source $shell\" 激活 Java 环境.\e[0m" 
 }
 
 
@@ -67,7 +67,7 @@ function enable_nodejs18() {
   elif [[ $SHELL == *"/zsh" ]]; then
     shell="$HOME/.zshrc"
   else
-    echo "You do not have any shell profiles such as .bashrc or .zshrc."
+    echo -e "\e[31mYou do not have any shell profiles such as .bashrc or .zshrc.\e[0m"
     echo "If you use other shells(etc. fish), maybe you shoule contact the admin."
     exit 1
   fi
@@ -75,7 +75,7 @@ function enable_nodejs18() {
   echo 'export PATH=/usr/local/node-v18.20.2-linux-x64/bin:$PATH' >> $shell
 
   echo "Node.js 18 LTS has been deployed."
-  echo "执行 \"source $shell\" 激活 Node.js 环境." 
+  echo -e "\e[33m执行 \"source $shell\" 激活 Node.js 环境.\e[0m" 
 }
 
 function enable_nodejs16() {  
@@ -84,7 +84,7 @@ function enable_nodejs16() {
   elif [[ $SHELL == *"/zsh" ]]; then
     shell="$HOME/.zshrc"
   else
-    echo "You do not have any shell profiles such as .bashrc or .zshrc."
+    echo -e "\e[31mYou do not have any shell profiles such as .bashrc or .zshrc.\e[0m"
     echo "If you use other shells(etc. fish), maybe you shoule contact the admin."
     exit 1
   fi
@@ -92,22 +92,17 @@ function enable_nodejs16() {
   echo 'export PATH=/opt/node-v16.20.2-linux-x64/bin:$PATH' >> $shell
 
   echo "Node.js 16 LTS has been deployed."
-  echo "执行 \"source $shell\" 激活 Node.js 环境." 
+  echo -e "\e[33m执行 \"source $shell\" 激活 Node.js 环境.\e[0m" 
 }
 
 # 切换 shell
 function chsh-bash() { 
     chsh -s /bin/bash;
     cp /etc/skel/.bashrc /etc/skel/.bash_profile $HOME
-    echo "##############################################"
-    echo "The current shell has changed to \"bash\"."
-    echo "Please run 'exit' to log out."
-    echo "The shell change will effect on the next log in!"
-    echo
-    echo "当前shell已切换为\"bash\"."
-    echo "请执行'exit'退出登录。"
-    echo "下次登录时修改才会生效！"
-    echo "##############################################"
+
+    echo -e "\e[32m当前shell已切换为\"bash\".\e[0m"
+    echo -e "\e[33m请执行'exit'退出登录。\e[0m"
+    echo -e "\e[33m下次登录时修改才会生效！\e[0m"
 }
 function chsh-zsh() { /usr/local/script/chsh-zsh.sh; }
 

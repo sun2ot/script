@@ -14,13 +14,13 @@ fi
 # 函数内容
 ep_func() {
     export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890
-    echo "代理设置成功， mihomo 将在 127.0.0.1:7890 为您服务^_^"
-    echo "本次代理将消耗yzh的流量，请节省使用哦(ㆆᴗㆆ)"
+    echo -e "\e[32m代理设置成功， mihomo 将在 127.0.0.1:7890 为您服务^_^\e[0m"
+    echo -e "\e[32m本次代理将消耗yzh的流量，请节省使用哦(ㆆᴗㆆ)\e[0m"
 }
 
 dp_func() {
     unset http_proxy https_proxy all_proxy
-    echo "代理取消成功^_^"
+    echo -e "\e[32m代理取消成功^_^\e[0m"
 }
 
 if [ ! -f "$HOME/$rc_file" ] || [ ! -w "$HOME/$rc_file" ]; then
@@ -44,9 +44,8 @@ cat "$HOME/$rc_file" >> "$temp_file"
 cp "$temp_file" "$HOME/$rc_file"
 rm "$temp_file"
 
-echo "###############请看这里########################"
-echo "1. 代理模块注入成功"
-echo "2. 请手动执行 source $HOME/$rc_file"
-echo "3. 执行 ep 开启代理，执行 dp 取消代理"
-echo "4. 下次登录无需再次执行该步骤"
-echo "################非常重要#######################"
+echo -e "\e[31m请注意：\e[0m"
+echo -e "\e[33m1. 代理模块注入成功\e[0m"
+echo -e "\e[33m2. 请手动执行 source $HOME/$rc_file\e[0m"
+echo -e "\e[33m3. 执行 ep 开启代理，执行 dp 取消代理\e[0m"
+echo -e "\e[33m4. 下次登录无需再次执行该步骤\e[0m"
