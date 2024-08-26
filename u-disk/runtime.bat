@@ -6,9 +6,9 @@ setlocal enabledelayedexpansion
 echo.
 echo -----------------------------------------------------------
 echo 请选择要安装的运行环境：
-echo 1. VC运行库 ^t 2. Anaconda3 ^t 3. Git
-echo 4. .NET8 ^t 5. .NET6 ^t 6. WPS VBA
-echo 7. jdk17 ^t 8. Python3.10 ^t 9. vim
+echo 1. VC运行库    2. Anaconda3    3. Git
+echo 4. .NET8       5. .NET6        6. WPS VBA
+echo 7. jdk17       8. Python3.10   9. vim
 echo 10. 退出
 echo -----------------------------------------------------------
 echo.
@@ -19,11 +19,11 @@ set /p choice=请输入您的选择（1-10）：
 
 :: 根据用户输入执行对应操作
 if "!choice!"=="1" (
-    call   Ops\Runtime\VC-Runtime-All-in-One-Feb-2024\install_all.bat
+    call    Ops\Runtime\VC-Runtime-All-in-One\install_all.bat
 ) else if "!choice!"=="2" (
     start   Ops\Runtime\Anaconda3-2024.02-1-Windows-x86_64.exe
 ) else if "!choice!"=="3" (
-    start   Ops\Runtime\Git-2.44.0-64-bit.exe
+    start   Ops\Runtime\Git-2.45.2-64-bit.exe
 ) else if "!choice!"=="4" (
     start   Ops\Runtime\DotNet-desktop-runtime-8.0.1-win-x64.exe
 ) else if "!choice!"=="5" (
