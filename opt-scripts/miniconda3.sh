@@ -5,13 +5,13 @@
 # 检查传参数量
 if [ $# -ne 1 ]; then
     echo "Usage: $0 </absolute path/to/install/miniconda3>, the specified path not exists is ok, either."
-    echo "Watch out! The path should end with 'miniconda3'."
+    echo "\e[33m Watch out! The path should be end with 'miniconda3'."
     exit 1
 fi
 
 path="$1"
 
-echo "sun2ot 定制版一键conda脚本 for nmu-whr 已启动, wait please..."
+echo "\e[1m\e[32m sun2ot 定制版一键 conda 脚本 for nmu-whr 已启动, wait please..."
 
 init_shell() {
   # 初始化标志
@@ -28,7 +28,7 @@ init_shell() {
       # 初始化zsh
       $path/bin/conda init zsh
     else
-      echo "You do not have any shell profiles such as .bashrc or .zshrc."
+      echo "\e[31m You do not have any shell profiles such as .bashrc or .zshrc."
       echo "If you use other shells(etc. fish), maybe you shoule contact the admin."
       exit 1
     fi
@@ -39,7 +39,7 @@ init_shell() {
     elif [[ $SHELL == *"/zsh" ]]; then
       echo "Zsh detected."
     else
-      echo "No bash or zsh found. Run 'menu' to change your shell first."
+      echo "\e[31m No bash or zsh found. Change your shell first."
       exit 1
     fi
   fi
