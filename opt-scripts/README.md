@@ -36,3 +36,4 @@ menu.sh                     # 脚本主菜单
 2. `init-menu.sh`：初始化脚本主菜单，主要执行以下操作
     - 软链接脚本到 `/usr/local/script`
     - 软链接shell配置到骨架目录 `/etc/skel`
+3. 主菜单中的反馈 bug 功能需借助企业微信机器人实现，自行创建 `wx_work_key` 文件，见 [official docs](https://developer.work.weixin.qq.com/document/path/91770#%E6%96%87%E6%9C%AC%E7%B1%BB%E5%9E%8B)
