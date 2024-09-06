@@ -5,13 +5,13 @@
 # 检查传参数量
 if [ $# -ne 1 ]; then
     echo "Usage: $0 </absolute path/to/install/miniconda3>, the specified path not exists is ok, either."
-    echo "\e[33m Watch out! The path should be end with 'miniconda3'."
+    echo -e "\e[33m Watch out! The path should be end with 'miniconda3'."
     exit 1
 fi
 
 path="$1"
 
-echo "\e[1m\e[32m sun2ot 定制版一键 conda 脚本 for nmu-whr 已启动, wait please..."
+echo -e "\e[1m\e[32m sun2ot 定制版一键 conda 脚本 for nmu-whr 已启动, wait please..."
 
 init_shell() {
   # 初始化标志
@@ -28,7 +28,7 @@ init_shell() {
       # 初始化zsh
       $path/bin/conda init zsh
     else
-      echo "\e[31m You do not have any shell profiles such as .bashrc or .zshrc."
+      echo -e "\e[31m You do not have any shell profiles such as .bashrc or .zshrc."
       echo "If you use other shells(etc. fish), maybe you shoule contact the admin."
       exit 1
     fi
@@ -39,7 +39,7 @@ init_shell() {
     elif [[ $SHELL == *"/zsh" ]]; then
       echo "Zsh detected."
     else
-      echo "\e[31m No bash or zsh found. Change your shell first."
+      echo -e "\e[31m No bash or zsh found. Change your shell first."
       exit 1
     fi
   fi
@@ -47,20 +47,17 @@ init_shell() {
 
 
 remind() {
-  echo "###########请看这里##################"
+  echo -e "\e[42m###########请看这里##################"
   if [[ $SHELL == *"/bash" ]]; then
-    echo "en: Run \"source ~/.bashrc\" to activate the conda environment."
-    echo "cn: 请执行 \"source ~/.bashrc\" 以激活conda环境!!!"
+    echo -e "\e[32m请执行 \"source ~/.bashrc\" 以激活conda环境!!!"
   elif [[ $SHELL == *"/zsh" ]]; then
-    echo "en: Run \"source ~/.zshrc\" to activate the conda environment."
-    echo "cn: 请执行 \"source ~/.zshrc\" 以激活conda环境!!!"
+    echo -e "\e[32m请执行 \"source ~/.zshrc\" 以激活conda环境!!!"
   fi
-  echo "###########求求了##################"
 }
 
 # 检查安装路径是否存在，如果存在，则跳过安装
 if [ -d "$path" ]; then
-    echo "Miniconda3 already installed. Do you want to re-initialize the conda environment in your current shell (y/n)? "
+    echo -e "\e[33mMiniconda3 already installed. Do you want to re-initialize the conda environment in your current shell (y/n)? "
     read -rp "Enter your choice: " user_response
     case $user_response in
         [Yy]*)
@@ -95,13 +92,13 @@ else
 
     init_shell --init
 
-    echo "Miniconda3 installation complete."
+    echo -e "\e[32mMiniconda3 installation complete."
 
     remind
 fi
 
 if [ -f ~/.condarc ]; then
-  echo "~/.condarc already exists. Skipping replacement."
+  echo -e "\e[33m~/.condarc already exists. Skipping replacement."
 else
   echo "Start replacing Conda sources with Tsinghua mirror sources..."
   tee ~/.condarc >/dev/null <<EOF
@@ -124,9 +121,9 @@ custom_channels:
 EOF
   # Check if .condarc has been replaced correctly
   if [ $? -eq 0 ]; then
-    echo "\"~/.condarc\" has been replaced by Tsinghua mirrors successfully"
+    echo -e "\e[32m\"~/.condarc\" has been replaced by Tsinghua mirrors successfully"
   else
-    echo "Failed to replace \"~/.condarc\" with Tsinghua mirrors"
+    echo -e "\e[31mFailed to replace \"~/.condarc\" with Tsinghua mirrors"
     exit 1
   fi
 fi

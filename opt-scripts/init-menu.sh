@@ -17,12 +17,12 @@ link_to() {
 
     echo "----------"
     if [ -L "$target_path" ]; then
-        echo "$target_path already exists. Deleting..."
+        echo -e "$target_path already exists. \e[31mDeleting...\e[0m"
         rm "$target_path"
     fi
 
     ln -s "$source_path" "$target_path"
-    echo "$source_path linked to $target_path"
+    echo -e "$source_path \e[32mlinked to\e[0m $target_path"
     echo "----------"
     echo
 }
@@ -31,6 +31,8 @@ link_to() {
 scripts_to_link=("chsh-zsh.sh" "miniconda3.sh" "proxy.sh" "mihomo.sh" "go.sh" "java.sh" "node16.sh")
 # shell配置文件
 shell_profiles=(".bash_profile" ".zsh_profile")
+# 配置文件
+share_files=("starship.toml")
 
 # 链接脚本
 for script in "${scripts_to_link[@]}"; do
@@ -39,24 +41,27 @@ for script in "${scripts_to_link[@]}"; do
     link_to "$target_path" "$script_path"
 done
 
-# 链接配置文件
+# 链接骨架文件
 for profile in "${shell_profiles[@]}"; do
     profile_path=$(realpath "$profile")
     target_path="/etc/skel/$profile"
     link_to "$target_path" "$profile_path"
-    echo "-------------------------"
 done
 
-# 链接starship配置文件
-link_to "/usr/local/share/starship.toml" $(realpath starship.toml)
+# 链接配置文件
+for profile in "${share_files[@]}"; do
+    profile_path=$(realpath "$profile")
+    target_path="/usr/local/share/$profile"
+    link_to "$target_path" "$profile_path"
+done
 
 # 链接主菜单
 if [ -L "/usr/local/bin/menu" ]; then
-    echo "/usr/local/bin/menu already exists. Deleting..."
+    echo -e "/usr/local/bin/menu already exists. \e[31mDeleting...\e[0m"
     rm /usr/local/bin/menu
     ln -s $(realpath menu.sh)  /usr/local/bin/menu
-    echo "menu.sh re-linked."
+    echo -e "\e[32mmenu.sh re-linked.\e[0m"
 else
     ln -s $(realpath menu.sh) /usr/local/bin/menu
-    echo "menu.sh linked."
+    echo -e "\e[32mmenu.sh linked.\e[0m"
 fi

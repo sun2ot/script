@@ -106,6 +106,26 @@ function chsh-bash() {
 }
 function chsh-zsh() { /usr/local/script/chsh-zsh.sh; }
 
+function feedback() {
+    read -p "你想对管理员说：" msg
+
+    # 构建JSON消息体
+    json_msg=$(printf '{"msgtype": "text", "text": {"content": "%s"}}' "$msg")
+
+    token=""
+    if [ -f "wx_hook_key" ]; then
+        # 不要用我的 token 哦🔪
+        token=$(cat wx_hook_key)
+    else
+        echo "No token found. Please check the file 'wx_hook_key'."
+        exit 1
+    fi
+
+    curl "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=$token" \
+    -H 'Content-Type: application/json' \
+    -d "$json_msg"
+}
+
 function exit_program() {
     echo "Bye 🛫"
     exit 0
@@ -116,7 +136,7 @@ function show_menu() {
     echo "---------"
     echo "   菜单   "
     echo "---------"
-    echo "Tips: 部分功能未完全测试，如有bug请及时反馈管理员。"
+    echo "Tips: 部分功能未完全测试，如有 bug 请及时反馈管理员。"
     echo
     echo "1. 启用代理"
     echo "2. 安装 miniconda"
@@ -127,6 +147,7 @@ function show_menu() {
     echo "7. 启用 Java-11.0.22 环境"
     echo "8. 启用 Node.js 18 LTS 环境(适用于物理机)"
     echo "9. 启用 Node.js 16 LTS 环境(适用于AIOS)"
+    echo "00. 反馈 bug"
     echo "0. 退出"
     echo
     read -p "请输入一个选项（数字）：" option
@@ -161,6 +182,9 @@ function show_menu() {
             ;;
         0)
             exit_program
+            ;;
+        00)
+            feedback
             ;;
         *)
             echo "无效的选项"
