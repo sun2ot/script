@@ -13,7 +13,7 @@ function install_miniconda() { /usr/local/script/miniconda3.sh $HOME/miniconda3;
 # 安装 miniconda3 for AIOS
 function install_miniconda_AIOS() {
     if [ ! -L $HOME/$USER ]; then
-        echo "Call the admin to init your account!"
+        echo -e "\e[31m请联系管理员对你的账户进行初始化! 或者当前计算节点不属于 AIOS!"
         exit 1
     else
         /usr/local/script/miniconda3.sh $HOME/$USER/miniconda3; 
@@ -208,7 +208,7 @@ function show_admin_menu() {
     echo "----------"
     echo "   Admin  "
     echo "----------"
-    echo "Warning: You have entered the administrator menu. Carefully!!"
+    echo -e "\e[33mWarning: You have entered the administrator menu. Carefully!!\e[0m"
     echo
     echo "1. Deploy/Update Starship"
     echo "2. Deploy mihomo"
