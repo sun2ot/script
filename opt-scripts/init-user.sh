@@ -12,15 +12,13 @@ fi
 user="$1"
 
 # 检查NFS下是否存在用户存储，如果不存在则创建目录并修改所有权和权限
+# AIOS的NFS中默认权限为777
+# 方便和安全只能二选一
 if [ ! -d "/private/$user" ]; then
     echo -e "\e[33mNFS has no this user's storage. Will create..."
     mkdir "/private/$user"
     sudo chmod 777 /private/$user
 fi
-
-# AIOS的NFS中默认权限为777
-# 方便和安全只能二选一
-# sudo chown $user:$user /private/$user
 
 # 确保/home/$user目录存在，否则ln命令会失败
 if [ ! -d "/home/$user" ]; then
@@ -34,7 +32,9 @@ if [ ! -L "/home/$user/$user" ]; then
     echo "/home/$user/$user has been linked to NFS"
 fi
 
-# sudo chown $user:$user /home/$user/$user
+# 为正常使用免密登录，需修改ssh相关文件权限
+sudo chmod 600 /home/$user/.ssh/authorized_keys
+sudo chmod 700 /home/$user/.ssh
 
 echo -e "\e[32mPreparation for $user completed."
 
