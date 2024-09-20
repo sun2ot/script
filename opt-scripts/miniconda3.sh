@@ -49,9 +49,9 @@ init_shell() {
 remind() {
   echo -e "\e[42m###########请看这里##################\e[0m"
   if [[ $SHELL == *"/bash" ]]; then
-    echo -e "\e[32m请执行 \"source ~/.bashrc\" 以激活conda环境!!!\e[0m"
+    echo -e "请执行 \e[32m\"source ~/.bashrc\"\e[0m 以激活conda环境!!!"
   elif [[ $SHELL == *"/zsh" ]]; then
-    echo -e "\e[32m请执行 \"source ~/.zshrc\" 以激活conda环境!!!\e[0m"
+    echo -e "请执行 \e[32m\"source ~/.zshrc\"\e[0m 以激活conda环境!!!"
   fi
 }
 
@@ -84,7 +84,8 @@ else
     mkdir -p $path || { echo -e "\e[31mFailed to create directory.\e[0m"; exit 1; }
 
     # 下载安装脚本
-    wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O $path/miniconda.sh
+    # wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O $path/miniconda.sh
+    wget https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/Miniconda3-latest-Linux-x86_64.sh -O $path/miniconda.sh
 
     # 执行脚本并安装
     # bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3 || { echo "Miniconda3 installation failed."; exit 1; }
