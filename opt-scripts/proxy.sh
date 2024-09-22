@@ -13,8 +13,8 @@ fi
 
 # 函数内容
 ep_func() {
-    export https_proxy="http://127.0.0.1:$CLASH_PORT" http_proxy="http://127.0.0.1:$CLASH_PORT" all_proxy="socks5://127.0.0.1:$CLASH_PORT"
-    echo -e "\e[32m代理设置成功， mihomo 将在 127.0.0.1:$CLASH_PORT 为您服务^_^\e[0m"
+    export https_proxy="http://$PROXY:$CLASH_PORT" http_proxy="http://$PROXY:$CLASH_PORT" all_proxy="socks5://$PROXY:$CLASH_PORT"
+    echo -e "\e[32m代理设置成功， mihomo 将在 $PROXY:$CLASH_PORT 为您服务^_^\e[0m"
     echo -e "\e[32m本次代理将消耗yzh的流量，请节省使用哦(ㆆᴗㆆ)\e[0m"
 }
 
@@ -31,6 +31,7 @@ fi
 # 在rc文件开头添加函数定义
 temp_file=$(mktemp)
 proxy_config="# Proxy setup functions added by sun2ot script
+PROXY=127.0.0.1
 CLASH_PORT=7890
 ep()
 $(
