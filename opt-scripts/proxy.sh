@@ -2,13 +2,17 @@
 
 # 向用户的shell配置文件开头写入两个函数：设置/取消设置 代理
 
+source error_handler.sh
+
 # 检查当前用户的shell是否为bash
 if [ -n "$SHELL" ] && [ "$(basename "$SHELL")" = "bash" ]; then
     shell_type="bash"
     rc_file=".bashrc"
-else
+elif [ -n "$SHELL" ] && [ "$(basename "$SHELL")" = "zsh" ]; then
     shell_type="zsh"
     rc_file=".zshrc"
+else
+    error_handler 1
 fi
 
 # 函数内容
@@ -24,7 +28,7 @@ dp_func() {
 }
 
 if [ ! -f "$HOME/$rc_file" ] || [ ! -w "$HOME/$rc_file" ]; then
-    echo "$HOME/$rc_file 不存在或不可写，代理设置失败 QAQ!"
+    error_handler 2
     exit 1
 fi
 
@@ -47,7 +51,7 @@ cp "$temp_file" "$HOME/$rc_file"
 rm "$temp_file"
 
 echo -e "\e[31m请注意：\e[0m"
-echo -e "\e[33m1. 代理模块注入成功\e[0m"
-echo -e "\e[33m2. 请手动执行 source $HOME/$rc_file\e[0m"
-echo -e "\e[33m3. 执行 ep 开启代理，执行 dp 取消代理\e[0m"
+echo -e "m1. 代理模块\e[33注入成功\e[0m"
+echo -e "2. 请手动执行 \e[33msource $HOME/$rc_file\e[0m"
+echo -e "3. 执行\e[33m ep \e[0m开启代理，执行\e[33m dp \e[0m取消代理"
 echo -e "\e[33m4. 下次登录无需再次执行该步骤\e[0m"

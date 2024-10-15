@@ -11,7 +11,7 @@ fi
 
 path="$1"
 
-echo -e "\e[1m\e[32m sun2ot 定制版一键 conda 脚本 for nmu-whr 已启动, wait please...\e[0m"
+echo -e "\e[1m\e[32msun2ot 定制版一键 conda 脚本 for nmu-whr 已启动, wait please...\e[0m"
 
 init_shell() {
   # 初始化标志
@@ -57,8 +57,8 @@ remind() {
 
 # 检查安装路径是否存在，如果存在，则跳过安装
 if [ -d "$path" ]; then
-    echo -e "\e[33mMiniconda3 already installed.\e[0m Do you want to \e[33mre-initialize\e[0m the conda environment in your current shell (y/n)? "
-    read -rp "Enter your choice: " user_response
+    echo -e "\e[33m检测到 Miniconda3 已部署.\e[0m 是否需要 \e[33m重新启用\e[0m conda 环境 (y/n)? "
+    read -rp "请选择(Y/y/N/n): " user_response
     case $user_response in
         [Yy]*)
             # 初始化bash或zsh
@@ -66,42 +66,41 @@ if [ -d "$path" ]; then
             remind
             ;;
         [Nn]*)
-            echo "Okay, nothing happened."
+            echo "好的, 什么也没有发生."
             ;;
         *)
-            echo "Invalid response and nothing happened."
-            echo "But I want you to input \e[32mYy/Nn\e[0m next time, all right?"
+            echo "错误的选择, 所以什么也没有发生."
+            echo "请输入 \e[32mY/y/N/n\e[0m, OK?"
             ;;
     esac
     exit 1
 else
-    echo "Miniconda3 not found, starting installation..."
+    echo "没有检测到 Miniconda3, 开始部署..."
 
     # just debug
     init_shell
 
     # 建立miniconda3文件夹
-    mkdir -p $path || { echo -e "\e[31mFailed to create directory.\e[0m"; exit 1; }
+    mkdir -p $path || { echo -e "\e[31m创建路径失败.\e[0m"; exit 1; }
 
     # 下载安装脚本
     # wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O $path/miniconda.sh
     wget https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/Miniconda3-latest-Linux-x86_64.sh -O $path/miniconda.sh
 
     # 执行脚本并安装
-    # bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3 || { echo "Miniconda3 installation failed."; exit 1; }
-    bash $path/miniconda.sh -b -u -p $path || { echo -e "\e[31Miniconda3 installation failed.\e[0m"; exit 1; }
+    bash $path/miniconda.sh -b -u -p $path || { echo -e "\e[31Miniconda3 安装失败.\e[0m"; exit 1; }
 
     init_shell --init
 
-    echo -e "\e[32mMiniconda3 installation complete.\e[0m"
+    echo -e "\e[32mMiniconda3 安装成功.\e[0m"
 
     remind
 fi
 
 if [ -f ~/.condarc ]; then
-  echo -e "\e[33m~/.condarc already exists. Skipping replacement.\e[0m"
+  echo -e "\e[33m~/.condarc 已存在.\e[0m"
 else
-  echo "Start replacing Conda sources with Tsinghua mirror sources..."
+  echo "开始配置 conda 清华镜像源..."
   tee ~/.condarc >/dev/null <<EOF
 channels:
   - defaults
@@ -122,9 +121,9 @@ custom_channels:
 EOF
   # Check if .condarc has been replaced correctly
   if [ $? -eq 0 ]; then
-    echo -e "\e[32m\"~/.condarc\" has been replaced by Tsinghua mirrors successfully\e[0m"
+    echo -e "\e[32m\"~/.condarc\" 已配置清华镜像!\e[0m"
   else
-    echo -e "\e[31mFailed to replace \"~/.condarc\" with Tsinghua mirrors\e[0m"
+    echo -e "\e[31m配置 \"~/.condarc\" 清华镜像失败!\e[0m"
     exit 1
   fi
 fi
