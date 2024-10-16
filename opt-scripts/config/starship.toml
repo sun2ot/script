@@ -22,6 +22,9 @@ symbol = " "
 symbol = " "
 ignore_base = false
 
+[container]
+disabled = true
+
 [crystal]
 symbol = " "
 
@@ -65,10 +68,9 @@ symbol = " "
 symbol = " "
 
 [hostname]
-disabled = true
-ssh_symbol = " "
+ssh_symbol = "@"
 format = '[$ssh_symbol$hostname]($style) '
-trim_at = '-'
+trim_at = ''
 
 [java]
 symbol = " "

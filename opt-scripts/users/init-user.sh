@@ -16,7 +16,7 @@ user="$1"
 # 方便和安全只能二选一
 if [ ! -d "/private/$user" ]; then
     echo -e "\e[33mNFS has no this user's storage. Will create..."
-    mkdir "/private/$user"
+    sudo mkdir "/private/$user"
     sudo chmod 777 /private/$user
 fi
 
@@ -33,6 +33,9 @@ if [ ! -L "/home/$user/$user" ]; then
 fi
 
 # 为正常使用免密登录，需修改ssh相关文件权限
+if [ ! -f "/home/$user/.ssh/authorized_keys" ]
+    sudo touch /home/$user/.ssh/authorized_keys
+fi
 sudo chmod 600 /home/$user/.ssh/authorized_keys
 sudo chmod 700 /home/$user/.ssh
 

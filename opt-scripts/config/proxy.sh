@@ -2,7 +2,7 @@
 
 # 向用户的shell配置文件开头写入两个函数：设置/取消设置 代理
 
-source error_handler.sh
+source util/error_handler.sh
 
 # 检查当前用户的shell是否为bash
 if [ -n "$SHELL" ] && [ "$(basename "$SHELL")" = "bash" ]; then

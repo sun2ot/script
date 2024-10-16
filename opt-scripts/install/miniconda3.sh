@@ -2,6 +2,9 @@
 
 # 接受用户传入的安装路径，部署miniconda3
 
+# 导入依赖
+source util/tips.sh
+
 # 检查传参数量
 if [ $# -ne 1 ]; then
     echo "Usage: $0 </absolute path/to/install/miniconda3>, the specified path not exists is ok, either."
@@ -45,15 +48,6 @@ init_shell() {
   fi
 }
 
-
-remind() {
-  echo -e "\e[42m###########请看这里##################\e[0m"
-  if [[ $SHELL == *"/bash" ]]; then
-    echo -e "请执行 \e[32m\"source ~/.bashrc\"\e[0m 以激活conda环境!!!"
-  elif [[ $SHELL == *"/zsh" ]]; then
-    echo -e "请执行 \e[32m\"source ~/.zshrc\"\e[0m 以激活conda环境!!!"
-  fi
-}
 
 # 检查安装路径是否存在，如果存在，则跳过安装
 if [ -d "$path" ]; then
