@@ -11,7 +11,7 @@ source /usr/local/script/util/detect_shell.sh
 cmd="$1"
 
 # 代理
-function start_proxy() { source $proxy; }
+function start_proxy() { /usr/local/script/config/proxy.sh; }
 
 # 安装 miniconda3
 function install_miniconda() { /usr/local/script/install/miniconda3.sh $HOME/miniconda3; }
@@ -183,10 +183,12 @@ function mihomo() { /usr/local/script/extract/mihomo.sh; }
 function install_go() { /usr/local/script/extract/go.sh; }
 function install_java() { /usr/local/script/extract/java.sh; }
 function install_nodejs16() { /usr/local/script/extract/node16.sh; }
+function install_nvim() { /usr/local/script/extract/nvim.sh; }
 function install_mamba() {
     wget "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
     bash Miniforge3-$(uname)-$(uname -m).sh
 }
+
 
 # 显示管理员菜单
 function show_admin_menu() {
@@ -201,6 +203,7 @@ function show_admin_menu() {
     echo "4. Deploy Java"
     echo "5. Deploy Node.js 16 (for AIOS)"
     echo "6. Install mamba"
+    echo "7. Deploy Nvim"
     echo "0. Exit"
     echo
     read -p "Please choose an option (number): " option
@@ -224,6 +227,9 @@ function show_admin_menu() {
         6)
             install_mamba
             ;;
+        7)  
+            install_nvim
+            ;;
         0)
             exit_program
             ;;
@@ -239,4 +245,3 @@ if [ $# -eq 0 ]; then
 elif [ $cmd == "--admin" ]; then
     show_admin_menu
 fi
-
