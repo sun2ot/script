@@ -82,7 +82,7 @@ function enable_nodejs16() {
 # 切换 shell
 function chsh_bash() { 
     chsh -s /bin/bash;
-    cp /etc/skel/.bashrc config/.bash_profile $HOME
+    cp /etc/skel/.bashrc /usr/local/script/config/.bash_profile $HOME
     next_login
 }
 function chsh-zsh() { /usr/local/script/install/chsh-zsh.sh; }
