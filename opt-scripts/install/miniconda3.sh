@@ -3,7 +3,7 @@
 # 接受用户传入的安装路径，部署miniconda3
 
 # 导入依赖
-source util/tips.sh
+source ../util/tips.sh
 
 # 检查传参数量
 if [ $# -ne 1 ]; then
