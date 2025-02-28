@@ -51,7 +51,7 @@ cp "$temp_file" "$HOME/$rc_file"
 rm "$temp_file"
 
 echo -e "\e[31m请注意：\e[0m"
-echo -e "m1. 代理模块\e[33注入成功\e[0m"
+echo -e "1. 代理模块\e[33注入成功\e[0m"
 echo -e "2. 请手动执行 \e[33msource $HOME/$rc_file\e[0m"
 echo -e "3. 执行\e[33m ep \e[0m开启代理，执行\e[33m dp \e[0m取消代理"
 echo -e "\e[33m4. 下次登录无需再次执行该步骤\e[0m"
