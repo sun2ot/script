@@ -39,6 +39,9 @@ function exit_program() {
     exit 0
 }
 
+# 新增配置 TeX Live 环境变量
+function config_latex() { /usr/local/script/config/latex.sh; }
+
 # 显示菜单
 function show_menu() {
     echo "---------"
@@ -51,6 +54,7 @@ function show_menu() {
     echo "3. 安装 miniconda for AIOS"
     echo "4. 切换 bash"
     echo "5. 切换 zsh"
+    echo "6. 配置 TeX Live 环境变量"
     echo "0. 退出"
     echo
     read -p "请输入一个选项（数字）：" option
@@ -70,6 +74,9 @@ function show_menu() {
             ;;
         5)
             chsh-zsh
+            ;;
+        6)
+            config_latex
             ;;
         0)
             exit_program
