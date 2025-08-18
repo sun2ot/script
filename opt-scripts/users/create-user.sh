@@ -20,6 +20,6 @@ sudo chown -R $user:$user /home/$user
 sudo chmod 755 /home/$user
 
 # 设置密码
-echo "正在设置 $user 的密码："
+echo "正在设置 $user 的默认密码："
 echo "$user:$INITIAL_PASSWORD" | chpasswd
 
