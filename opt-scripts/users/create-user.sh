@@ -17,7 +17,7 @@ INITIAL_PASSWORD="123456"
 sudo useradd -m $user
 sudo cp -a /etc/skel/. /home/$user
 sudo chown -R $user:$user /home/$user
-sudo chmod 755 /home/$user
+sudo chmod 754 /home/$user
 
 # 设置密码
 echo "正在设置 $user 的默认密码："
