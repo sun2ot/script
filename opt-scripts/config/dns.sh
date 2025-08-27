@@ -12,5 +12,5 @@ sudo cp /tmp/new_resolv.conf /etc/resolv.conf
 
 rm /tmp/new_resolv.conf
 
-echo "nameservers added to /etc/resolv.conf"
+echo -e "\e[32mnameservers added to /etc/resolv.conf\e[0m"
 

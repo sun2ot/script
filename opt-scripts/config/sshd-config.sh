@@ -16,5 +16,5 @@ sudo sed -i "s|^\s*UsePAM\s\+yes\s*$|$pam_config|" /etc/ssh/sshd_config
 
 sudo service ssh restart
 
-echo "SSH 服务已重启，新的配置已生效。"
+echo -e "\e[32mSSH 服务已重启，新的配置已生效。\e[0m"
 

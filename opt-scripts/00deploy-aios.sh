@@ -7,5 +7,6 @@ config/dns.sh
 config/sshd-config.sh
 config/apt-sources.sh
 install/install-aios.sh
-extract/prepare.sh
+config/setup_locale.sh
+# extract/prepare.sh
 ./init-menu.sh

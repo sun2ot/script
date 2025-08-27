@@ -42,6 +42,11 @@ function exit_program() {
 # 新增配置 TeX Live 环境变量
 function config_latex() { /usr/local/script/config/latex.sh; }
 
+function deploy_pixi() {
+    echo "正在部署 pixi..."
+    curl -fsSL https://pixi.sh/install.sh | sh
+}
+
 # 显示菜单
 function show_menu() {
     echo "---------"
@@ -55,6 +60,7 @@ function show_menu() {
     echo "4. 切换 bash"
     echo "5. 切换 zsh"
     echo "6. 配置 TeX Live 环境变量"
+    echo "7. 部署 pixi"
     echo "0. 退出"
     echo
     read -p "请输入一个选项（数字）：" option
@@ -77,6 +83,9 @@ function show_menu() {
             ;;
         6)
             config_latex
+            ;;
+        7)
+            deploy_pixi
             ;;
         0)
             exit_program

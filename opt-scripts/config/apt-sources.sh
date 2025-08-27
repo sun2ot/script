@@ -24,5 +24,5 @@ deb http://security.ubuntu.com/ubuntu/ bionic-security main restricted universe 
 # # deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-proposed main restricted universe multiverse
 EOF
 
-echo "APT source has been replaced by tsinghua mirrors successfully"
-echo "Version: Ubuntu 18.04 LTS (bionic)"
+echo -e "\e[32mAPT source has been replaced by tsinghua mirrors successfully\e[0m"
+echo -e "\e[32mVersion: Ubuntu 18.04 LTS (bionic)\e[0m"
