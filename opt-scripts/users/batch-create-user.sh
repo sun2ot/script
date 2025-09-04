@@ -21,7 +21,7 @@ fi
 # 逐行读取用户列表文件
 while IFS= read -r user || [[ -n "$user" ]]
 do
-    ./create-user.sh "$user"
+    sudo ./create-user.sh "$user"
 done < "$user_list_file"
 
 exit 0
