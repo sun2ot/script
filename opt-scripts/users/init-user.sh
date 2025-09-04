@@ -34,6 +34,7 @@ fi
 
 # 为正常使用免密登录，需修改ssh相关文件权限
 if [ ! -f "/home/$user/.ssh/authorized_keys" ]; then
+    sudo mkdir -p /home/$user/.ssh
     sudo touch /home/$user/.ssh/authorized_keys
 fi
 sudo chmod 600 /home/$user/.ssh/authorized_keys
