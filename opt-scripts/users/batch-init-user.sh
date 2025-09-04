@@ -20,7 +20,7 @@ fi
 
 # 逐行读取用户列表文件
 while IFS= read -r user || [[ -n "$user" ]]; do
-    ./init-user.sh "$user"
+    sudo ./init-user.sh "$user"
 done < "$user_list_file"
 
 exit 0
