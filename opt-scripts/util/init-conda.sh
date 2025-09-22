@@ -4,8 +4,8 @@
 # exit when any command fails
 set -e
 # import error handler
-. ../util/error_handler.sh
-source ../util/tips.sh
+. ./error_handler.sh
+source ./tips.sh
 
 # Check if conda path is provided
 if [ $# -gt 1 ]; then
