@@ -51,22 +51,7 @@ init_shell() {
 
 # 检查安装路径是否存在，如果存在，则跳过安装
 if [ -d "$path" ]; then
-    echo -e "\e[33m检测到 Miniconda3 已部署.\e[0m 是否需要 \e[33m重新启用\e[0m conda 环境 (y/n)? "
-    read -rp "请选择(Y/y/N/n): " user_response
-    case $user_response in
-        [Yy]*)
-            # 初始化bash或zsh
-            init_shell --init
-            remind
-            ;;
-        [Nn]*)
-            echo "好的, 什么也没有发生."
-            ;;
-        *)
-            echo "错误的选择, 所以什么也没有发生."
-            echo "请输入 \e[32mY/y/N/n\e[0m, OK?"
-            ;;
-    esac
+    echo -e "\e[33m检测到 Miniconda3 已部署.\e[0m"
     exit 1
 else
     echo "没有检测到 Miniconda3, 开始部署..."
@@ -91,11 +76,9 @@ else
     remind
 fi
 
-if [ -f ~/.condarc ]; then
-  echo -e "\e[33m~/.condarc 已存在.\e[0m"
-else
-  echo "开始配置 conda 清华镜像源..."
-  tee ~/.condarc >/dev/null <<EOF
+if [ -f $path/.condarc ]; then
+  echo "开始配置 conda 像源..."
+  tee $path/.condarc >/dev/null <<EOF
 channels:
   - defaults
 show_channel_urls: true
@@ -103,21 +86,21 @@ default_channels:
   - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
   - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r
   - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2
+  - https://mirrors.sustech.edu.cn/anaconda/pkgs/free
+  - https://mirrors.sustech.edu.cn/anaconda/pkgs/pro
 custom_channels:
   conda-forge: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
-  msys2: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
-  bioconda: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
-  menpo: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
   pytorch: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
-  pytorch-lts: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
-  simpleitk: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
-  deepmodeling: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/
+  nvidia: https://mirrors.sustech.edu.cn/anaconda-extra/cloud
 EOF
   # Check if .condarc has been replaced correctly
   if [ $? -eq 0 ]; then
-    echo -e "\e[32m\"~/.condarc\" 已配置清华镜像!\e[0m"
+    echo -e "\e[32m\"$path/.condarc\" 已配置清华镜像!\e[0m"
   else
-    echo -e "\e[31m配置 \"~/.condarc\" 清华镜像失败!\e[0m"
+    echo -e "\e[31m配置 \"$path/.condarc\" 清华镜像失败!\e[0m"
     exit 1
   fi
+else
+  echo -e "\e[31m没有找到 \"$path/.condarc\" 文件，无法配置像源!\e[0m"
+  exit 1
 fi
