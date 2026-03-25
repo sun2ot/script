@@ -5,6 +5,7 @@
 // @author       sun2ot
 // @license      AGPL-3.0-or-later
 // @match        *://*/*
+// @noframes
 // @grant        GM_setValue
 // @grant        GM_getValue
 // @grant        GM_registerMenuCommand
